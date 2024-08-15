@@ -107,6 +107,25 @@ const simpleMessage = <div
   </div>
 </div >
 
+const simpleMessage1 = <div
+  style={{
+    alignItems: 'center',
+    backgroundImage: `url("https://frame-degen.poidh.xyz/bg-poidh.png")`,
+    backgroundSize: '100% 100%',
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    height: '100%',
+    justifyContent: 'center',
+    textAlign: 'center',
+    width: '100%',
+    position: "absolute",
+    top: 0,
+    left: 0
+  }}
+>
+</div >
+
 app.frame('/', (c) => {
   return c.res({
     action: '/bountytitle',
@@ -627,6 +646,218 @@ app.frame('/b/:chain/:txHash', async (c) => {
     ),
     intents: [
       <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyId}`}>Check out the bounty </Button.Link>,
+    ]
+  })
+
+
+})
+
+app.frame('/bounty/:chain/:id', async (c) => {
+  const { deriveState, req } = c;
+
+  // get the txn hash
+  const chain = c.req.param('chain')
+  const bountyid = c.req.param('id')
+  console.log("🚀 ~ app.frame ~ txHash:", chain, bountyid)
+
+  // get data from txn hash
+
+  const data = await fetch(`https://poidh-farcaster-bot.onrender.com/bounty/${chain}/${bountyid}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+
+  const { amount, name, description, id } = data
+
+  const valueResult = convert(amount || "")
+
+  return c.res({
+    action: '',
+    image: (
+      <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
+        {simpleMessage}
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 800,
+            fontSize: 60,
+          }}
+        >
+          {name}
+        </div>
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 400,
+            fontSize: 30,
+            justifyContent: "center",
+            width: 780,
+            textAlign: 'center',
+          }}
+        >
+          {description}
+        </div>
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 400,
+            fontSize: 30,
+            width: 780,
+            justifyContent: "center",
+            textAlign: 'center'
+          }}
+        >
+          {`Reward: ${valueResult} ${chain === 'Degen Mainnet' ? "$DEGEN" : "ETH"}`}
+        </div>
+      </div>
+    ),
+    intents: [
+      <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
+    ]
+  })
+
+
+})
+
+app.frame('/claim/:chain/:id', async (c) => {
+  const { deriveState, req } = c;
+
+  // get the txn hash
+  const chain = c.req.param('chain')
+  const claimid = c.req.param('id')
+  console.log("🚀 ~ app.frame ~ txHash:", chain, claimid)
+
+  // get data from txn hash
+
+  const data = await fetch(`https://poidh-farcaster-bot.onrender.com/claim/${chain}/${claimid}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+
+  const { name, description, id } = data
+
+  const amount = data.bounty.amount
+
+  console.log(data)
+
+  const bountyid = data.bounty.id
+
+  const imgData = await fetch(`${data.uri}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+
+  console.log(imgData)
+
+  const img = imgData.image
+
+  const valueResult = convert(amount || "")
+
+  return c.res({
+    action: '',
+    image: (
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        {/* Background */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 0
+        }}>
+          {simpleMessage1}
+        </div>
+
+        {/* Image (70% height) */}
+        <div style={{
+          width: '100%',
+          height: '80%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
+          zIndex: 1
+        }}>
+          <img
+            src={img}
+            alt=""
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </div>
+
+        {/* Text content (30% height) */}
+        <div style={{
+          width: '100%',
+          height: '20%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1
+        }}>
+          <div style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            fontWeight: 800,
+            fontSize: '35px',
+          }}>
+            {name}
+          </div>
+          <div style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            fontWeight: 400,
+            fontSize: '25px',
+            textAlign: 'center',
+          }}>
+            {description}
+          </div>
+          <div style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            fontWeight: 400,
+            fontSize: '20px',
+            textAlign: 'center'
+          }}>
+            {`Reward: ${valueResult} ${chain === 'Degen Mainnet' ? "$DEGEN" : "ETH"}`}
+          </div>
+        </div>
+      </div>
+    ),
+    imageAspectRatio: '1:1',
+    intents: [
+      <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
     ]
   })
 
