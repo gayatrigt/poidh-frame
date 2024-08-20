@@ -746,7 +746,7 @@ app.frame('/claim/:chain/:id', async (c) => {
   })
     .then(response => response.json())
 
-  const { name, description, id } = data
+  const { name, description, id, accepted } = data
 
   const amount = data.bounty.amount
 
@@ -798,12 +798,13 @@ app.frame('/claim/:chain/:id', async (c) => {
         {/* Image (70% height) */}
         <div style={{
           width: '100%',
-          height: '80%',
+          height: '70%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           overflow: 'hidden',
-          zIndex: 1
+          zIndex: 1,
+          marginTop: "20px"
         }}>
           <img
             src={img}
@@ -811,15 +812,16 @@ app.frame('/claim/:chain/:id', async (c) => {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'contain'
+              objectFit: 'contain',
+              border: "2px",
+              borderColor: "white"
             }}
           />
         </div>
-
         {/* Text content (30% height) */}
         <div style={{
           width: '100%',
-          height: '20%',
+          height: '30%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -827,31 +829,41 @@ app.frame('/claim/:chain/:id', async (c) => {
           zIndex: 1
         }}>
           <div style={{
-            color: 'white',
-            fontFamily: 'Inter',
-            fontWeight: 800,
-            fontSize: '35px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
-            {name}
+            <div style={{
+              color: 'white',
+              fontFamily: 'Inter',
+              fontWeight: 800,
+              fontSize: '30px',
+            }}>
+              {name}
+            </div>
+            <div style={{
+              color: 'white',
+              fontFamily: 'Inter',
+              fontWeight: 400,
+              fontSize: '20px',
+              textAlign: 'center',
+            }}>
+              {description}
+            </div>
           </div>
-          <div style={{
-            color: 'white',
+          {accepted && <div style={{
+            color: 'red',
             fontFamily: 'Inter',
             fontWeight: 400,
             fontSize: '25px',
             textAlign: 'center',
+            border: "1px",
+            padding: "4px",
+            marginTop: "10px",
           }}>
-            {description}
-          </div>
-          <div style={{
-            color: 'white',
-            fontFamily: 'Inter',
-            fontWeight: 400,
-            fontSize: '20px',
-            textAlign: 'center'
-          }}>
-            {`Reward: ${valueResult} ${chain === 'Degen Mainnet' ? "$DEGEN" : "ETH"}`}
-          </div>
+            Accepted
+          </div>}
         </div>
       </div>
     ),
