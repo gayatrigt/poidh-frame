@@ -652,6 +652,27 @@ app.frame('/b/:chain/:txHash', async (c) => {
 
 })
 
+function getChainLabel(chain: string) {
+  let chainLabel;
+
+  switch (chain) {
+    case 'Degen Mainnet':
+      chainLabel = 'degen';
+      break;
+    case 'Base Network':
+      chainLabel = 'base';
+      break;
+    case 'Arbitrum One':
+      chainLabel = 'arbitrum';
+      break;
+    default:
+      chainLabel = 'unknown';
+      break;
+  }
+
+  return chainLabel;
+}
+
 app.frame('/bounty/:chain/:id', async (c) => {
   const { deriveState, req } = c;
 
@@ -662,7 +683,7 @@ app.frame('/bounty/:chain/:id', async (c) => {
 
   // get data from txn hash
 
-  const data = await fetch(`https://poidh-farcaster-bot.onrender.com/bounty/${chain}/${bountyid}`, {
+  const data = await fetch(`https://poidh-farcaster-bot-vot5.onrender.com/bounty/${chain}/${bountyid}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json'
@@ -673,6 +694,9 @@ app.frame('/bounty/:chain/:id', async (c) => {
   const { amount, name, description, id } = data
 
   const valueResult = convert(amount || "")
+
+  const ChainLabel = getChainLabel(chain);
+  console.log(ChainLabel); // Output: 'degen'
 
   return c.res({
     action: '',
@@ -721,7 +745,7 @@ app.frame('/bounty/:chain/:id', async (c) => {
       </div>
     ),
     intents: [
-      <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
+      <Button.Link href={`https://poidh.xyz/${ChainLabel}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
     ]
   })
 
@@ -767,6 +791,9 @@ app.frame('/claim/:chain/:id', async (c) => {
   const img = imgData.image
 
   const valueResult = convert(amount || "")
+
+  const ChainLabel = getChainLabel(chain);
+  console.log(ChainLabel); // Output: 'degen'
 
   return c.res({
     action: '',
@@ -869,7 +896,7 @@ app.frame('/claim/:chain/:id', async (c) => {
     ),
     imageAspectRatio: '1:1',
     intents: [
-      <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
+      <Button.Link href={`https://poidh.xyz/${ChainLabel}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
     ]
   })
 
