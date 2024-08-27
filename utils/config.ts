@@ -61,5 +61,3 @@ export const networks = [
 ];
 
 export default chains;
-
-console.log(JSON.stringify(chains))

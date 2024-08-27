@@ -761,8 +761,10 @@ app.frame('/claim/:chain/:id', async (c) => {
   console.log("🚀 ~ app.frame ~ txHash:", chain, claimid)
 
   // get data from txn hash
+  const url = `https://poidh-farcaster-bot-vot5.onrender.com/claim/${chain}/${claimid}`
+  console.log("🚀 ~ app.frame ~ url:", url)
 
-  const data = await fetch(`https://poidh-farcaster-bot.onrender.com/claim/${chain}/${claimid}`, {
+  const data = await fetch(url, {
     method: 'GET',
     headers: {
       'Accept': 'application/json'
@@ -772,9 +774,9 @@ app.frame('/claim/:chain/:id', async (c) => {
 
   const { name, description, id, accepted } = data
 
-  const amount = data.bounty.amount
+  // const amount = data.bounty.amount
 
-  console.log(data)
+  console.log("claim data:", data)
 
   const bountyid = data.bounty.id
 
@@ -786,11 +788,11 @@ app.frame('/claim/:chain/:id', async (c) => {
   })
     .then(response => response.json())
 
-  console.log(imgData)
+  console.log("image data", imgData)
 
   const img = imgData.image
 
-  const valueResult = convert(amount || "")
+  // const valueResult = convert(amount || "")
 
   const ChainLabel = getChainLabel(chain);
   console.log(ChainLabel); // Output: 'degen'
