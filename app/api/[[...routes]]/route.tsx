@@ -50,7 +50,6 @@ const app = new Frog<{ State: State }>({
 // export const runtime = 'edge'
 const { Heading } = createSystem({
   fonts: {
-
     Inter: [
       {
         name: 'Inter',
@@ -128,6 +127,7 @@ const simpleMessage1 = <div
 
 app.frame('/', (c) => {
   return c.res({
+    title: 'poidh',
     action: '/bountytitle',
     image: "https://frame-degen.poidh.xyz/screen-1.png",
     intents: [
@@ -139,6 +139,7 @@ app.frame('/', (c) => {
 app.frame('/bountytitle', (c) => {
 
   return c.res({
+    title: 'poidh',
     action: '/bountydescription',
     image: (
       <div style={{
@@ -203,6 +204,7 @@ app.frame('/bountydescription', (c) => {
   }
 
   return c.res({
+    title: 'poidh',
     action: '/chain',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -254,6 +256,7 @@ app.frame('/chain', (c) => {
   }
 
   return c.res({
+    title: 'poidh',
     action: '/bountyreward',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -312,6 +315,7 @@ app.frame('/bountyreward', (c) => {
   }
 
   return c.res({
+    title: 'poidh',
     action: '/bountytype',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -363,6 +367,7 @@ app.frame('/bountytype', (c) => {
   }
 
   return c.res({
+    title: 'poidh',
     action: '/wallet',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -424,6 +429,7 @@ app.frame('/wallet', (c) => {
 
 
   return c.res({
+    title: 'poidh',
     action: '/share',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -474,6 +480,7 @@ app.frame('/share', (c) => {
   }
 
   return c.res({
+    title: 'poidh',
     action: '/',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -599,6 +606,7 @@ app.frame('/b/:chain/:txHash', async (c) => {
   const valueResult = convert(amount || "")
 
   return c.res({
+    title: 'poidh',
     action: '',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
@@ -699,6 +707,7 @@ app.frame('/bounty/:chain/:id', async (c) => {
   console.log(ChainLabel); // Output: 'degen'
 
   return c.res({
+    title: 'poidh',
     action: '',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
@@ -798,6 +807,7 @@ app.frame('/claim/:chain/:id', async (c) => {
   console.log(ChainLabel); // Output: 'degen'
 
   return c.res({
+    title: 'poidh',
     action: '',
     image: (
       <div style={{
