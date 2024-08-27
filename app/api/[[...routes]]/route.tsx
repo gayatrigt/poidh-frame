@@ -128,6 +128,16 @@ const simpleMessage1 = <div
 app.frame('/', (c) => {
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/bountytitle',
     image: "https://frame-degen.poidh.xyz/screen-1.png",
     intents: [
@@ -140,6 +150,16 @@ app.frame('/bountytitle', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/bountydescription',
     image: (
       <div style={{
@@ -205,6 +225,16 @@ app.frame('/bountydescription', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/chain',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -257,6 +287,16 @@ app.frame('/chain', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/bountyreward',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -316,6 +356,16 @@ app.frame('/bountyreward', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/bountytype',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -368,6 +418,16 @@ app.frame('/bountytype', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/wallet',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -430,6 +490,16 @@ app.frame('/wallet', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/share',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -481,6 +551,16 @@ app.frame('/share', (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '/',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%" }}>
@@ -607,6 +687,16 @@ app.frame('/b/:chain/:txHash', async (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
@@ -708,6 +798,16 @@ app.frame('/bounty/:chain/:id', async (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '',
     image: (
       <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
@@ -808,6 +908,16 @@ app.frame('/claim/:chain/:id', async (c) => {
 
   return c.res({
     title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
     action: '',
     image: (
       <div style={{
