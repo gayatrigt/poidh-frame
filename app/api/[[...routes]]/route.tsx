@@ -988,6 +988,10 @@ app.frame('/claim/:chain/:id', async (c) => {
               fontFamily: 'Inter',
               fontWeight: 800,
               fontSize: '30px',
+              width: "600px",
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
               {name}
             </div>
@@ -997,6 +1001,7 @@ app.frame('/claim/:chain/:id', async (c) => {
               fontWeight: 400,
               fontSize: '20px',
               textAlign: 'center',
+              width: "600px"
             }}>
               {description}
             </div>
