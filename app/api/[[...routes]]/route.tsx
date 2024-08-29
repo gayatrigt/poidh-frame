@@ -1001,7 +1001,9 @@ app.frame('/claim/:chain/:id', async (c) => {
               fontWeight: 400,
               fontSize: '20px',
               textAlign: 'center',
-              width: "600px"
+              width: "600px",
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
               {description}
             </div>
