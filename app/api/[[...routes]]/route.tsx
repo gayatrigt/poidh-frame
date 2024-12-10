@@ -146,6 +146,27 @@ app.frame('/', (c) => {
   })
 })
 
+app.frame('/gif', (c) => {
+  return c.res({
+    title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
+    action: '/bountytitle',
+    image: 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnVwemVqejVldWd2ZzNqOWJxanFyZW1icnNhZjF0cXR2dXNkM25lYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EnEh5LY96karayu8wG/giphy.webp',
+    intents: [
+      <Button value="start">Create a Bounty</Button>,
+    ],
+  })
+})
+
 app.frame('/bountytitle', (c) => {
 
   return c.res({
@@ -855,6 +876,95 @@ app.frame('/bounty/:chain/:id', async (c) => {
     ),
     intents: [
       <Button.Link href={`https://poidh.xyz/${ChainLabel}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
+    ]
+  })
+
+
+})
+
+app.frame('/:chain/:id', async (c) => {
+  const { deriveState, req } = c;
+
+  // get the txn hash
+  const chain = c.req.param('chain')
+  const bountyid = c.req.param('id')
+  console.log("🚀 ~ app.frame ~ txHash:", chain, bountyid)
+
+  // get data from txn hash
+
+  const data = await fetch(`https://poidh-app-theta.vercel.app/api/bounties/${chain}/${bountyid}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+
+  const name = data.bounty.title
+  const amount = data.bounty.amount
+  const description = data.bounty.description
+
+  const valueResult = convert(amount || "")
+
+  return c.res({
+    title: 'poidh',
+    unstable_metaTags: [
+      {
+        property: "title",
+        content: "poidh"
+      },
+      {
+        property: "og:title",
+        content: "poidh"
+      },
+    ],
+    action: '',
+    image: (
+      <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", height: "100%", textAlign: 'center' }}>
+        {simpleMessage}
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 800,
+            fontSize: 60,
+          }}
+        >
+          {name}
+        </div>
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 400,
+            fontSize: 30,
+            justifyContent: "center",
+            width: 780,
+            textAlign: 'center',
+          }}
+        >
+          {description}
+        </div>
+        <div
+          style={{
+            color: 'white',
+            fontFamily: 'Inter',
+            display: 'flex',
+            fontWeight: 400,
+            fontSize: 30,
+            width: 780,
+            justifyContent: "center",
+            textAlign: 'center'
+          }}
+        >
+          {`Reward: ${valueResult} ${chain === 'Degen Mainnet' ? "$DEGEN" : "ETH"}`}
+        </div>
+      </div>
+    ),
+    intents: [
+      <Button.Link href={`https://poidh.xyz/${chain}/bounty/${bountyid}`}>Check out the bounty </Button.Link>,
     ]
   })
 
